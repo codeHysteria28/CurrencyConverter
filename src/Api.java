@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 public class Api {
     private static String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_Wq7feOnimL6iWCr1yfNCErtrTQLdYHRZaWcbqVgn";
 
-    public String getApi(){
+    public CurrencyRates getApi(){
         StringBuilder apiContent = new StringBuilder();
 
         try{
@@ -36,6 +36,7 @@ public class Api {
             e.printStackTrace();
         }
 
-        return apiContent.toString();
+        Gson gson = new Gson();
+        return gson.fromJson(apiContent.toString(), CurrencyRates.class);
     }
 }

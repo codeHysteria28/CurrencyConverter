@@ -1,11 +1,13 @@
-public class CurrencyRates {
-    private String currencyName;
-    private double currencyValue;
+import java.util.Map;
 
-    CurrencyRates(String currency, double value){
-        currencyName = currency;
-        currencyValue = value;
+public class CurrencyRates {
+    private Map<String, Double> data;
+
+    public Map<String, Double> getData(){
+        return data;
     }
 
-
+    public void setData(Map<String, Double> data){
+        this.data = data;
+    }
 }

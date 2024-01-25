@@ -5,8 +5,8 @@ public class Main {
 
     public static void main(String[] args){
         Api api = new Api();
-        String storeApiData = api.getApi();
+        CurrencyRates storeApiData = api.getApi();
 
-        System.out.println(storeApiData);
+        System.out.println(storeApiData.getData().get("CZK"));
     }
 }
