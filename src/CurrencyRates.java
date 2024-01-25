@@ -10,4 +10,5 @@ public class CurrencyRates {
     public void setData(Map<String, Double> data){
         this.data = data;
     }
+
 }

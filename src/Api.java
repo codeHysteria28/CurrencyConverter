@@ -8,12 +8,13 @@ import java.net.URISyntaxException;
 import com.google.gson.Gson;
 
 public class Api {
-    private static String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_Wq7feOnimL6iWCr1yfNCErtrTQLdYHRZaWcbqVgn";
+    private static String apiKey = "fca_live_Wq7feOnimL6iWCr1yfNCErtrTQLdYHRZaWcbqVgn";
 
     public CurrencyRates getApi(){
         StringBuilder apiContent = new StringBuilder();
 
         try{
+            String apiUrl = "https://api.freecurrencyapi.com/v1/latest?apikey=" + apiKey;
             URI uri = new URI(apiUrl);
             URL url = uri.toURL();
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
