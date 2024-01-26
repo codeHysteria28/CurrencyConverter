@@ -23,7 +23,12 @@ public class CurrencyTable {
         }
 
         // initialize the JTable
-        j = new JTable(arrayData, columnNames);
+        j = new JTable(arrayData, columnNames) {
+            // prevent cells and rows to be editable after click
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         j.setBounds(30, 40, 200,300);
 
         // add JTable to JScrollPane
