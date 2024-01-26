@@ -1,18 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
     static JFrame frame = new JFrame();
     static JComboBox<String> jc1, jc2;
     static JLabel from,to, currency1, currency2;
+    static Api api = new Api();
+    static CurrencyRates cr;
 
     public static void comboBox(){
-        // fetch the data from api
-        Api api = new Api();
-        CurrencyRates cr = api.getApi();
-
         // get the values and save them to an array
         Double[] valuesArray = cr.getData().values().toArray(new Double[0]);
 
@@ -37,25 +33,19 @@ public class Main {
         jc1 = new JComboBox<>(keysArray);
         jc2 = new JComboBox<>(keysArray);
 
-        // combo listeners
-        jc1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedKey = (String) jc1.getSelectedItem();
-                Double currencyValue = cr.getData().get(selectedKey);
-                currency1.setText(String.valueOf(currencyValue));
-            }
+        // combo listeners lambda
+        jc1.addActionListener(e -> {
+            String selectedKey = (String) jc1.getSelectedItem();
+            Double currencyValue = cr.getData().get(selectedKey);
+            currency1.setText(String.valueOf(currencyValue));
         });
 
-        jc2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // get selectedKey
-                String selectedKey = (String) jc1.getSelectedItem();
-                // get value from CurrencyRates Map according to selectedKey
-                Double currencyValue = cr.getData().get(selectedKey);
-                currency2.setText(String.valueOf(currencyValue));
-            }
+        jc2.addActionListener(e -> {
+            // get selectedKey
+            String selectedKey = (String) jc2.getSelectedItem();
+            // get value from CurrencyRates Map according to selectedKey
+            Double currencyValue = cr.getData().get(selectedKey);
+            currency2.setText(String.valueOf(currencyValue));
         });
 
         // create panels for each combo box and its label
@@ -87,6 +77,7 @@ public class Main {
     }
 
     public static void generateUI(){
+        cr = api.getApi();
 //        CurrencyTable ct = new CurrencyTable();
 //
 //        // adding table to the frame®

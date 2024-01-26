@@ -9,8 +9,11 @@ import com.google.gson.Gson;
 
 public class Api {
     private static String apiKey = "fca_live_Wq7feOnimL6iWCr1yfNCErtrTQLdYHRZaWcbqVgn";
+    private CurrencyRates cr = null;
 
     public CurrencyRates getApi(){
+        if(cr != null) return cr;
+
         StringBuilder apiContent = new StringBuilder();
 
         try{
@@ -38,6 +41,8 @@ public class Api {
         }
 
         Gson gson = new Gson();
-        return gson.fromJson(apiContent.toString(), CurrencyRates.class);
+        cr = gson.fromJson(apiContent.toString(), CurrencyRates.class);
+
+        return cr;
     }
 }
