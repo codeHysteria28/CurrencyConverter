@@ -1,12 +1,11 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Main {
     static JFrame frame = new JFrame();
     static JComboBox<String> jc1, jc2;
     static JLabel from,to, currency1, currency2;
-    static JButton convert;
+    static JButton convert, clear;
     static JTextField t1, t2;
     static Api api = new Api();
     static CurrencyRates cr;
@@ -84,10 +83,23 @@ public class Main {
                 t1Val = t1.getText();
                 double t1ValNum = Double.parseDouble(t1Val);
                 conversionResult = t1ValNum * currencyValue;
-                t2.setText(String.valueOf(conversionResult));
+                String toTwoDecimals = String.format("%.2f", conversionResult);
+                t2.setText(toTwoDecimals);
             }
+        });
 
-            System.out.println(conversionResult);
+        // clear values after conversion
+        clear = new JButton("Clear");
+
+        // action listener for clear button
+        clear.addActionListener(e -> {
+            boolean ist1Empty = t1.getText().trim().isEmpty();
+            boolean ist2Empty = t2.getText().trim().isEmpty();
+
+            if(!ist1Empty && !ist2Empty){
+                t1.setText("");
+                t2.setText("");
+            }
         });
 
         // text fields to enter currency
@@ -110,6 +122,7 @@ public class Main {
 
         JPanel p3 = new JPanel();
         p3.add(convert);
+        p3.add(clear);
 
         // add combo boxes, labels and JPanel to frame
         gbc.gridx = 0;
